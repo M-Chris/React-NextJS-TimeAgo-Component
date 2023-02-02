@@ -42,7 +42,7 @@ function _tokenDistance(token, count, options) {
 function getDateFnsLocaleLang() {
     const preferredLanguages = navigator.language || navigator.userLanguage;
     for (let i = 0; i < preferredLanguages.length; i++) {
-        const locale = preferredLanguages[i];
+        const locale = preferredLanguages[i].replace('-', '');
         if (!(locale in Locales)) {
             continue;
         }
@@ -54,7 +54,7 @@ function getDateFnsLocaleLang() {
 
 function getDateFnsLocaleOS() {
     // eslint-disable-next-line new-cap
-    const osLocale = Intl.DateTimeFormat().resolvedOptions().locale;
+    const osLocale = Intl.DateTimeFormat().resolvedOptions().locale.replace('-', '');
     if (!(osLocale in Locales)) {
         console.warn(`Unsupported locale: ${osLocale}. Falling back to en-US.`);
         return Locales.enUS;
